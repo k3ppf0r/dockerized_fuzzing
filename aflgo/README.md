@@ -20,11 +20,15 @@ Here is an example of using AFLGo: http://strongcourage.github.io/2019/06/20/afl
 # apt install -y subversion
 svn export https://github.com/UNIFUZZ/dockerized_fuzzing_examples/trunk/seed/lrz seed_lrz
 
+# mkdir -p seed_lrz && wget https://raw.githubusercontent.com/unifuzz/dockerized_fuzzing_examples/refs/heads/master/seed/lrz/seed.lrz -O seed_lrz/seed.lrz
+
 mkdir -p output/aflgo
 docker run --rm -w /work -it -v `pwd`:/work --privileged zjuchenyuan/aflgo_example_lrzip \
     /aflgo/afl-fuzz -m none -z exp -c 45m -i seed_lrz -o output/aflgo -- \
         /lrzip-CVE-2018-11496/obj-aflgo/lrzip -t @@
 ```
+获取output 查看权限
+sudo chmod 777 -R output/
 
 ## Dockerfile
 
